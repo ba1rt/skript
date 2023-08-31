@@ -1,0 +1,22 @@
+Command /fly:
+    Permission: op
+    Trigger:
+        If {fly.%player%} is false:
+            Send "&6you can fly." to player
+            set player's flight mode to true
+            Set {fly.%player%} to true
+            Stop
+        if {fly.%player%} is true:
+			Send "&6you can't fly anymore." to player
+        	set player's flight mode to false
+        	Delete {fly.%player%}
+        	Stop
+		
+on death:
+	if victim is player:
+		if {fly.%victim%} is true:
+			set player's flight mode to true
+			
+on join:
+	set {fly.%player%} to false 
+ 
