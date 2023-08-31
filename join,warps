@@ -1,0 +1,32 @@
+on join:
+	broadcast "&e&lwelcome %player%!"
+	teleport player to location(-1.5,-60,-3.48)
+	execute console command "/setspawn"
+	
+command /setspawn:
+	permission: op
+	trigger:
+		set {spawn} to location of block at location of player
+		send "set spawn to:{spawn}"
+
+command /spawn:
+	trigger:
+		teleport player to {spawn}
+		
+command /warps:
+	trigger:
+		set metadata tag "warps" of player to chest inventory with 3 rows named "&7warps"
+		set slot 12 of metadata tag "warps" of player to oak leaves named "forest" with lore "warp to the forest"
+		set slot 14 of metadata tag "warps" of player to block of gold named "events" with lore "warp to events"
+		set slot 4 of metadata tag "warps" of player to grass block named "spawn" with lore "teleport to spawn"
+		open (metadata tag "warps" of player) to player
+
+on inventory click:
+	if event-inventory = (metadata tag "warps" of player):
+		cancel event
+		if index of event-slot is 12:
+			teleport player to location(5.61,-60,-364.36)
+		if index of event-slot is 14:
+			teleport player to location(166,-60,194)
+		if index of event-slot is 4:
+			teleport player to location(-1.50,-60,-3.48)
