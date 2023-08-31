@@ -1,0 +1,11 @@
+on join:
+	while player is online:
+		set title of player's scoreboard to "&4fight&6legends"
+		set line 1 of player's scoreboard to "&cposition: z %player's z-coordinate%  "
+		set line 2 of player's scoreboard to "&cposition: y %player's y-coordinate%  "
+		set line 3 of player's scoreboard to "&cposition: x %player's x-coordinate% "
+		set line 4 of player's scoreboard to "&3gems: %{gems::%player%}%"
+		set line 5 of player's scoreboard to "&6gold: %{gold::%player%}%"
+		set line 6 of player's scoreboard to "&8name: &e%player% "
+		set line 7 of player's scoreboard to "&fserver ip: &4fight&6legends&7.minehut.gg"
+		wait 1 second
