@@ -1,0 +1,89 @@
+on death:
+	if victim is pig:
+		clear drops
+		chance of 100%:
+			set {_amount} to random integer between 0 and 5
+			set {_drop} to {_amount} of sunflower named "&6token"
+			drop {_drop} at victim's location
+			add 1 to {gold::%attacker%}
+			add 1 to {gems::%attacker%}
+	if victim is zombie:
+		if colored name of victim is "&4Zombie_Necromancer":
+			clear drops
+			chance of 100%:
+				set {_amount} to random integer between 1 and 3
+				set {_drop} to {_amount} of sunflower named "60"
+				drop {_drop} at victim's location
+		if colored name of victim is "&aZomboy":
+			clear drops
+			chance of 100%:
+				set {_amount} to random integer between 1 and 2
+				set {_drop} to {_amount} of sunflower named "4"
+				drop {_drop} at victim's location
+		if colored name of victim is "&2Silent_Zombie"
+			clear drops
+			chance of 100%:
+				set {_amount} to random integer between 1 and 2
+				set {_drop} to {_amount} of sunflower named "10"
+				drop {_drop} at victim's location
+		
+
+command /clearmobs:
+	permission: op
+	permission message: you don't have the permissions for this command. (lil bro)
+	trigger:
+		kill all pigs in player's world
+		broadcast "&4&l[BROADCAST]: &8all pigs are killed"
+		kill all zombies in player's world
+		
+command /luca:
+	cooldown: 10 seconds
+	cooldown message: "you can use this command in %remaining time%"
+	trigger:
+		send "luca is gay" to player
+		spawn pig
+		
+on break of sponge:
+	if player's gamemode is not creative:
+		cancel event
+		wait 2 seconds
+		summon zombie at location(3,-60,-405)
+		set {_y} to -58
+		send "%{_y}%" to player
+		loop blocks in radius 4 around the player:
+			if y coordinate of loop-block = -60:
+				set loop-block to stone
+				stop
+			else:
+				set loop-block to air
+on combust:  //no fire zombie :D
+  if event-entity is a zombie:
+    cancel event
+	
+on pickup of sunflower:
+	name of the event-item is "60":
+		wait 1 tick
+		set {_amount} to amount of sunflowers in event-player's inventory * 60
+		set {_value} to {_amount} 
+		remove all sunflowers from event-player's inventory
+		wait 1 tick
+		add {_value} to {gold::%player%}
+	name of the event-item is "4":
+		wait 1 tick
+		set {_amount} to amount of sunflowers in event-player's inventory * 4
+		set {_value} to {_amount} 
+		remove all sunflowers from event-player's inventory
+		wait 1 tick
+		add {_value} to {gold::%player%}
+	name of the event-item is "10"
+		wait 1 tick
+		set {_amount} to amount of sunflowers in event-player's inventory * 10
+		set {_value} to {_amount} 
+		remove all sunflowers from event-player's inventory
+		wait 1 tick
+		add {_value} to {gold::%player%}
+	
+	else:
+		send "mic check" to player
+		
+		
