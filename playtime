@@ -1,0 +1,28 @@
+command /playtime [<offline player>]:
+	trigger:
+		if arg 1 is not set:
+			send "%player%'s playtime is %{hplaytime::%player%}% hours,%{mplaytime::%player%}% minutes and %{splaytime::%player%}% seconds" to player
+		else:
+			send "%arg 1%'s playtime is %{hplaytime::%arg 1%}% hours,%{mplaytime::%arg 1%}% minutes and %{splaytime::%arg 1%}% seconds" to player
+			
+variables:
+	{splaytime::%player%} = 0
+	{mplaytime::%player%} = 0
+	{hplaytime::%player%} = 0
+
+on join:
+	if {firstjoined::*} does not contain player's uuid:
+		add player's uuid to {firstjoined::*}
+		set {splaytime::%player%} to 0
+		set {mplaytime::%player%} to 0
+		set {hplaytime::%player%} to 0
+		
+every 10 seconds:
+	loop all players:
+		add 10 to {splaytime::%loop-player%}
+		if {splaytime::%loop-player%} is 60:
+			subtract 60 from {splaytime::%loop-player%}
+			add 1 to {mplaytime::%loop-player%}
+		if {mplaytime::%loop-player%} is 60:
+			subtract 60 from {mplaytime::%loop-player%}
+			add 1 to {hplaytime::%loop-player%}
