@@ -1,0 +1,17 @@
+command /shop:
+	permission message: "&6no permission, come see me in the forest"
+	trigger:
+		set metadata tag "shop" of player to chest inventory with 3 rows named "&eSHOP"
+		set slot 15 of metadata tag "shop" of player to wooden sword named "&2wooden toothpick" with lore "&eprice = 5 gold"
+		open (metadata tag "shop" of player) to player
+		
+on inventory click:
+	if event-inventory = (metadata tag "shop" of player):
+		cancel event
+		if index of event-slot is 15:
+			if {gold::%player%} is lower than 5:
+				send "&4[warning]: &7you dont have enough gold, haha you are poor asf" to player
+				stop
+			else:
+				subtract 5 from {gold::%player%}
+				give player a wooden sword
