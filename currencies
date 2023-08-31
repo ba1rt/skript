@@ -1,0 +1,30 @@
+command /money <number> <player>:
+	permission: op
+	permission message: "stop it, you dont have the permission"
+	trigger:
+		add arg-1 to {gold::%player%} 
+		send "done!" to player
+	
+
+variables:
+	{gold::%player%} = 0
+	{gems::%player%} = 0
+
+command /balance <text> <offline player>:
+	trigger:
+		if arg 1 is "gold":
+			send "&6&l%arg 2% currently has: &r&6%{gold::%arg 2%}% gold" to player
+		if arg 1 is "gems":
+			send "&3&l%arg 2% currently has: &r&3%{gems::%arg 2%}% gems" to player
+
+command /cleargold <offline player>:
+	permission: op
+	permission message: "&4[warning]: you dont have the perms."
+	trigger:
+		set {gold::%arg 1%} to 0
+		
+command /cleargems <offline player>:
+	permission: op
+	permission message: "&4[warning]: you dont have the perms."
+	trigger:
+		set {gems::%arg 1%} to 0
