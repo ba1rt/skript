@@ -1,0 +1,45 @@
+command /classes:
+	trigger:
+		set metadata tag "classes" of player to chest inventory with 3 rows named "&7CLASSES"
+		set slot 14 of metadata tag "classes" of player to iron sword named "&2elf" with lore "&2&lgain the power of the elves"
+		set slot 12 of metadata tag "classes" of player to iron axe named "&6lumberjack" with lore "&6&lgain the power of a lumberjack"
+		open (metadata tag "classes" of player) to player
+variables:
+	{class::%player%} = " "
+
+on inventory click:
+	if event-inventory = (metadata tag "classes" of player):
+		cancel event
+		if index of event-slot is 14:
+			make player execute command "/class elf"
+		if index of event-slot is 12:
+			make player execute command "/class lumberjack"
+command /class <text>:
+	permission: op
+	permission message: "&6&lstop that you handsome human!"
+	cooldown: 1 day
+	cooldown message: "&6&lsorry man but you have to wait %remaining time% to use this command again"
+	trigger:
+		if arg-1 is "lumberjack":
+			clear all potion effects of player
+			apply strength 2 to the player for 20 days
+			broadcast "&4&l[broadcast]:&r woah %player% is now an lumberjack!"
+			set {class::%player%} to "lumberjack"
+			
+		if arg-1 is "elf":
+			clear all the potion effects of player
+			apply swiftness 2 to the player for 20 days
+			broadcast "&4&l[broadcast]:&r woah %player% is now an elf!"
+			set {class::%player%} to "elf"
+
+on respawn:
+	if {class::%player%} is "elf":
+		apply swiftness 2 to the player for 20 days
+			
+	if {class::%player%} is "lumberjack":
+		apply strength 2 to the player for 20 days
+	else:
+		send "&3you can pick classes yk, just talk to salim." to player
+		
+		
+		
