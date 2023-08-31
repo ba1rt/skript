@@ -1,0 +1,22 @@
+on chat:
+	set the chat format to "&3%player% &r[%{rank::%player%}%]: %{chatcolor::%player%}%%message%"
+   
+variables:
+	{rank::%player%} = "&7noob"
+	{chatcolor::%player%} = "&6"
+	
+on join:
+	if {firstjoined::*} does not contain player's uuid:
+		add player's uuid to {firstjoined::*}
+		set {chatcolor::%player%} to "&6"
+		set {rank::%player%} to "&7noob&r"`
+		broadcast "&6welcome &l%player%!"
+		make player execute command "/p auto"
+	else:
+		broadcast "&4welcome back &l%player%"
+
+command /reset <offline player>:
+	permission: op
+	trigger:
+		remove arg 1's uuid from {firstjoined::*}
+		clear inventory of player
