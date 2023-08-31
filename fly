@@ -18,5 +18,9 @@ on death:
 			set player's flight mode to true
 			
 on join:
-	set {fly.%player%} to false 
+	if {firstjoined::*} does not contain player's uuid:
+		add player's uuid to {firstjoined::*}
+		set {fly.%player%} to false
+	else:
+		send "welcomeback broski" to player
  
