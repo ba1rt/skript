@@ -1,0 +1,21 @@
+at 20:00:
+	add 1 to {days}
+	if {timer::%player%} is higher than 0:
+		subtract 1 from {timer::%player%}
+	
+on join:
+	set {%player%} to new bossbar
+	add player to bossbar
+	
+command /day:
+	trigger:
+		set time to 20:00
+
+command /daycount:
+	trigger:
+		send "there have been %{days}% days passed" to player
+	
+command /timer <number>:
+	trigger:
+		add arg-1 to {timer::%player%}
+		set title of bossbar {%player%} to "{timer::%player%}"
