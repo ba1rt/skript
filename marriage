@@ -1,3 +1,25 @@
+on load:
+  add "kissed" to {kisslist::*}
+  add "bussed" to {kisslist::*}
+  add "smooched" to {kisslist::*}
+  add "air kissed" to {kisslist::*}
+  add "made out" to {kisslist::*}
+  add "bussed" to {kisslist::*}
+  add "snogged" to {kisslist::*}
+  add "pecked" to {kisslist::*}
+  add "licked" to {ewwlist::*}
+  add "shaved" to {ewwlist::*}
+  add "bit" to {ewwlist::*}
+
+
+
 command /kiss <player>
   cooldown: 60s
-  cooldown message: "
+  cooldown message: "you can kiss <arg 1> in %remaining time% :D"
+  trigger:
+    chance of 80%:
+      set {_kisstype} to a random element of {kisslist::*}
+      broadcast "woah, %player% %{kisslist::*} %arg 1%"
+    chance of 20%:
+      set {_kisstype} to a random element of {ewwlist::*}
+      broadcast "ewww, %player% %{ewwlist::*} %arg 1%"
