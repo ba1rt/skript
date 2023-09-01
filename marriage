@@ -1,0 +1,3 @@
+command /kiss <player>
+  cooldown: 60s
+  cooldown message: "
