@@ -12,7 +12,9 @@ on load:
 	add "&l&clicked&r" to {ewwlist::*}
 	add "&l&cshaved&r" to {ewwlist::*}
 	add "&l&cbit&r" to {ewwlist::*}
-
+	
+variables:
+	{kisses::%player%} = 0
 
 
 command /kiss <player>:
@@ -20,10 +22,16 @@ command /kiss <player>:
 	cooldown message: you can kiss %arg 1% in %remaining time% :D
 	cooldown bypass: op
 	trigger:
+		add 1 to {kisses::%player%}
+		add 1 to {p::%player%::%arg 1%}
 		chance of 20%:
 			set {_kisstype} to a random element of {ewwlist::*}
-			broadcast "&4&l[eww]&r %player% %{_kisstype}% %arg 1%!!"
+			broadcast "&4&l[eww]&r %player% has %{_kisstype}% %arg 1%!!"
 			stop
 		chance of 80%:
 			set {_kisstype} to a random element of {kisslist::*}
-			broadcast "&4&l[woah]&r %player% %{_kisstype}% %arg 1%!!"
+			broadcast "&4&l[woah]&r %player% has %{_kisstype}% %arg 1%!!"
+
+command /kisses <offline player>:
+	trigger:
+		send "%arg 1% has %{kisses::%arg 1%}% kisses, which %{p::%arg 1%::%player%}% of them were to you."
