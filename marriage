@@ -1,25 +1,29 @@
 on load:
-  add "kissed" to {kisslist::*}
-  add "bussed" to {kisslist::*}
-  add "smooched" to {kisslist::*}
-  add "air kissed" to {kisslist::*}
-  add "made out" to {kisslist::*}
-  add "bussed" to {kisslist::*}
-  add "snogged" to {kisslist::*}
-  add "pecked" to {kisslist::*}
-  add "licked" to {ewwlist::*}
-  add "shaved" to {ewwlist::*}
-  add "bit" to {ewwlist::*}
+	delete {kisslist::*}
+	delete {ewwlist::*}
+	add "&lkissed&r" to {kisslist::*}
+	add "&lbussed&r" to {kisslist::*}
+	add "&lsmooched&r" to {kisslist::*}
+	add "&lair kissed&r" to {kisslist::*}
+	add "&lmade out&r" to {kisslist::*}
+	add "&lbussed&r" to {kisslist::*}
+	add "&lsnogged&r" to {kisslist::*}
+	add "&lpecked&r" to {kisslist::*}
+	add "&l&clicked&r" to {ewwlist::*}
+	add "&l&cshaved&r" to {ewwlist::*}
+	add "&l&cbit&r" to {ewwlist::*}
 
 
 
 command /kiss <player>:
-  cooldown: 60 seconds
-  cooldown message: you can kiss %arg 1% in %remaining time% :D
-  trigger:
-    chance of 80%:
-      set {_kisstype} to a random element of {kisslist::*}
-      broadcast "woah, %player% %{_kisstype}% %arg 1%"
-    chance of 20%:
-      set {_kisstype} to a random element of {ewwlist::*}
-      broadcast "ewww, %player% %{_kisstype}% %arg 1%"
+	cooldown: 60 seconds
+	cooldown message: you can kiss %arg 1% in %remaining time% :D
+	cooldown bypass: op
+	trigger:
+		chance of 20%:
+			set {_kisstype} to a random element of {ewwlist::*}
+			broadcast "&4&l[eww]&r %player% %{_kisstype}% %arg 1%!!"
+			stop
+		chance of 80%:
+			set {_kisstype} to a random element of {kisslist::*}
+			broadcast "&4&l[woah]&r %player% %{_kisstype}% %arg 1%!!"
