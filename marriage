@@ -14,12 +14,12 @@ on load:
 
 
 command /kiss <player>:
-  cooldown: 60s
-  cooldown message: "you can kiss <arg 1> in %remaining time% :D"
+  cooldown: 60 seconds
+  cooldown message: you can kiss %arg 1% in %remaining time% :D
   trigger:
     chance of 80%:
       set {_kisstype} to a random element of {kisslist::*}
-      broadcast "woah, %player% %{kisslist::*} %arg 1%"
+      broadcast "woah, %player% %{_kisstype}% %arg 1%"
     chance of 20%:
       set {_kisstype} to a random element of {ewwlist::*}
-      broadcast "ewww, %player% %{ewwlist::*} %arg 1%"
+      broadcast "ewww, %player% %{_kisstype}% %arg 1%"
