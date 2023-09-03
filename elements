@@ -1,2 +1,6 @@
 #checks inventory for items, if item gives stuff add to variable using item name
-#{cooldown::%player%},
+#{cooldownupgrade::%player%},{upgrade1::%player%} and {gold::%player%}
+
+command /tinker:
+	trigger:
+		
