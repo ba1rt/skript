@@ -1,6 +1,44 @@
-if location of loop-value = {location::%loop-value%}:
-			add 1 to {gold::%loop-value%}
-			add {cooldownupgrade::%loop-value%} to {cooldown::%loop-value%}
+on any movement:
+	if block below the player is gold block:
+		set {location::%player%} to player's location
+		if {cooldown::%player%} > 0:
+			stop
+		else:
+			add 1 to {gold::%player%}
+			add {cooldownupgrade::%player%} to {cooldown::%player%}
+
+every second:
+	loop all players:
 		if {cooldown::%loop-value%} > 0:
 			subtract 1 from {cooldown::%loop-value%}
-
+		if location of loop-value = {location::%loop-value%}:
+			if {cooldown::%loop-value%} > 0:
+				stop
+			else:
+				add 1 to {gold::%loop-value%}
+				add {cooldownupgrade::%loop-value%} to {cooldown::%loop-value%}
+			
+variables:
+	{cooldownupgrade::%player%} = 10
+	
+	
+command /gold:
+	trigger:
+		send "%{gold::%player%}%" to player
+	
+command /reset2:
+	trigger:
+		set {cooldown::%player%} to 0
+		
+on join:
+	while player is online:
+		set title of player's scoreboard to "&5gaylords"
+		set line 1 of player's scoreboard to "&cgold: %{gold::%player%}%----------------------------"
+		set line 2 of player's scoreboard to "%{cooldown::%player%}%"
+		wait 1 second
+		
+		
+command /test:
+	trigger:
+		add 1 * {upgrade1::%player%} to {gold::%player%}
+		set {upgrade1::%player%} to 9
