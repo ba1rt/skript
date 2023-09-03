@@ -1,0 +1,6 @@
+if location of loop-value = {location::%loop-value%}:
+			add 1 to {gold::%loop-value%}
+			add {cooldownupgrade::%loop-value%} to {cooldown::%loop-value%}
+		if {cooldown::%loop-value%} > 0:
+			subtract 1 from {cooldown::%loop-value%}
+
