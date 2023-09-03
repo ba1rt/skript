@@ -3,4 +3,7 @@
 
 command /tinker:
 	trigger:
-		
+		set metadata tag "elements" of player to chest inventory with 3 rows named "&7CLASSES"
+		set slot 14 of metadata tag "blue" of player to blue dye named "&9blue element"
+		set slot 12 of metadata tag "green" of player to green dye named "&agreen element"
+		open (metadata tag "elements" of player) to player
