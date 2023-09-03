@@ -20,25 +20,12 @@ every second:
 			
 variables:
 	{cooldownupgrade::%player%} = 10
-	
-	
-command /gold:
-	trigger:
-		send "%{gold::%player%}%" to player
-	
-command /reset2:
-	trigger:
-		set {cooldown::%player%} to 0
+	{upgrade1::%player%} = 1
 		
 on join:
 	while player is online:
 		set title of player's scoreboard to "&5gaylords"
-		set line 1 of player's scoreboard to "&cgold: %{gold::%player%}%----------------------------"
+		set line 1 of player's scoreboard to "&cgold: %{gold::%player%}%----------------------------" #testing purposes
 		set line 2 of player's scoreboard to "%{cooldown::%player%}%"
 		wait 1 second
-		
-		
-command /test:
-	trigger:
-		add 1 * {upgrade1::%player%} to {gold::%player%}
-		set {upgrade1::%player%} to 9
+
