@@ -35,3 +35,16 @@ command /kiss <player>:
 command /kisses <offline player>:
 	trigger:
 		send "%arg 1% has %{kisses::%arg 1%}% kisses, which %{p::%arg 1%::%player%}% of them were to you."
+
+
+command /topkisses:
+    trigger:
+        set {_top::*} to sorted indices of {kisses::*} in descending order
+        loop 10 times:
+            add {_top::%loop-value%} to {_top_10::*}
+        loop {_top_10::*}:
+            add 1 to {_n}
+            send "&a&l%{_n}% &7- &2%{_top_10::%{_n}%} parsed as offlineplayer% &7- &6%{kisses::%{_top_10::%{_n}%}%}% " to player
+#player gets exp and on levelup fireworks explode and player receives a multi on kisses.
+
+
