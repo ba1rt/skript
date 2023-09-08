@@ -1,1 +1,30 @@
+on load:
+	add "spirit of blue fish" to {waterem::*}
 
+command /tinker:
+	trigger:
+		set metadata tag "tinker" of player to chest inventory with 3 rows named "&7tinker"
+		set slot 10 of metadata tag "tinker" of player to blue dye named "water element" with lore "costs 550 flux"
+		set slot 12 of metadata tag "tinker" of player to yellow dye named "sun element" with lore "costs 1100 flux"
+		set slot 14 of metadata tag "tinker" of player to red dye named "fire element" with lore "costs 2500 flux"
+		set slot 16 of metadata tag "tinker" of player to purple dye named "moon element" with lore "costs 6500 flux"
+		open (metadata tag "tinker" of player) to player
+
+on inventory click:
+	if event-inventory = (metadata tag "tinker" of player):
+		cancel event
+		if index of event-slot is 10:
+			chance of 10%:
+				set {_water} to random number from 70 to 90
+				send "woah you just got something very rare!" to player
+				set {_element} to random element of {waterem::*}
+				give tropical fish named "%{_element}%" with lore "%{_water}%" to player
+				stop
+			
+
+on consume:
+	if item is tropical fish:
+		loop lore of item:
+			set {spiritmulti::%player%} to loop-value
+			wait 1 tick
+		send "your spiritmulti is now %{spiritmulti::%player%}%" to player
