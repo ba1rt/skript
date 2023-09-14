@@ -28,3 +28,7 @@ on consume:
 			set {spiritmulti::%player%} to loop-value
 			wait 1 tick
 		send "your spiritmulti is now %{spiritmulti::%player%}%" to player
+
+on mine:
+	if event-block is in {blocks*}:
+		
