@@ -57,7 +57,11 @@ on inventory click:
                 set {_element} to random element of {waterem::*}
                 give tropical fish named "%{_element}%" with lore "%{_water}%" to player
                 stop
-			
+on inventory click:
+    if event-inventory = (metadata tag "mine" of player):
+        cancel event
+        if index of event-slot is 10:
+            teleport player to location(1,-60,1, world "%player%")
 
 on consume:
     if item is tropical fish:
@@ -77,11 +81,12 @@ command /mine:
     trigger:
         if {mine::*} does not contain player's uuid:
             add player's uuid to {mine::*}
-            set {_creator} to new world creator named "%player's uuid%"
             set metadata tag "mine" of player to chest inventory with 3 rows named "&7mine"
             set slot 10 of metadata tag "mine" of player to grass block named "&7 mine" with lore "&lteleport to mine"
             set slot 12 of metadata tag "mine" of player to sponge named "block composition" with lore "&lchange block composition"
             open (metadata tag "mine" of player) to player
-            
+        else:
+	    open (metadata tag "mine" of player) to player
 
-		
+function mine(loc1: location, loc2: location):
+	set {_loc1} 
