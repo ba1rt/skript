@@ -85,12 +85,19 @@ command /mine:
             set slot 10 of metadata tag "mine" of player to grass block named "&7 mine" with lore "&lteleport to mine"
             set slot 12 of metadata tag "mine" of player to sponge named "block composition" with lore "&lchange block composition"
             open (metadata tag "mine" of player) to player
+            teleport player to location(1,-60,1, world "%player's uuid%")
         else:
-	    open (metadata tag "mine" of player) to player
-
-function mine(loc1: location,number: number):
-	set {_loc1} to {_loc1} ~ vector({_number},0,0)
+            teleport player to location(1,-60,1, world "%player's uuid%")
+			
+function mine(loc1: location,number: int):
 	loop {_number} times:
-		set blocks at {_loc1} to random element of {list::*}
-		set {_loc1} to {_loc1} ~ vector(0,0,%loop-number%)
+		set {_start} to {_loc1}
+		loop {_number} times:
+			set block at {_loc1} to random element of {blocks::*}
+			set {_loc1} to {_loc1} ~ vector(1,0,0)
+		set {_loc1} to {_start} ~ vector(0,0,1)
 		
+command /create mine <number>:
+	trigger:
+		add stone to {blocks::*}
+		mine(player's location, arg 1)
