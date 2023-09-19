@@ -37,6 +37,7 @@ command /rankup <number>:
                 send message "you are now rank {_2}. congrats!" to player
                 set {rank::%player's uuid%} to {_2}
                 set {rankmulti::%player's uuid%} to {_2}*0.2
+				set {minesize::%player%} to rounded down {rank::%player%}*0.05
 
 command /tinker:
     trigger:
@@ -61,7 +62,7 @@ on inventory click:
     if event-inventory = (metadata tag "mine" of player):
         cancel event
         if index of event-slot is 10:
-            teleport player to location(1,-60,1, world "%player%")
+
 
 on consume:
     if item is tropical fish:
@@ -85,9 +86,8 @@ command /mine:
             set slot 10 of metadata tag "mine" of player to grass block named "&7 mine" with lore "&lteleport to mine"
             set slot 12 of metadata tag "mine" of player to sponge named "block composition" with lore "&lchange block composition"
             open (metadata tag "mine" of player) to player
-            teleport player to location(1,-60,1, world "%player's uuid%")
         else:
-            teleport player to location(1,-60,1, world "%player's uuid%")
+
 			
 function mine(loc1: location,number: int):
 	loop {_number} times:
@@ -97,7 +97,7 @@ function mine(loc1: location,number: int):
 			set {_loc1} to {_loc1} ~ vector(1,0,0)
 		set {_loc1} to {_start} ~ vector(0,0,1)
 		
-command /create mine <number>:
+command /create mine:
 	trigger:
 		add stone to {blocks::*}
-		mine(player's location, arg 1)
+		mine(player's location, {minesize::%player%})
