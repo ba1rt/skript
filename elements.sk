@@ -88,5 +88,9 @@ command /mine:
         else:
 	    open (metadata tag "mine" of player) to player
 
-function mine(loc1: location, loc2: location):
-	set {_loc1} 
+function mine(loc1: location,number: number):
+	set {_loc1} to {_loc1} ~ vector({_number},0,0)
+	loop {_number} times:
+		set blocks at {_loc1} to random element of {list::*}
+		set {_loc1} to {_loc1} ~ vector(0,0,%loop-number%)
+		
