@@ -9,6 +9,7 @@ on join:
         set {balance::%player's uuid%} to 0
         set {spiritmulti::%player's uuid%} to 1
         set {rankmulti::%player's uuid%} to 1
+    
 
 command /rankprice <number> <number>:
     trigger:
@@ -16,17 +17,17 @@ command /rankprice <number> <number>:
             if arg 2 is set:
                 set {_arg1} to arg 1
                 set {_arg2} to arg 2
-                set {_1} to 50^(1.2*{_arg1})
-                set {_2} to 50^(1.2*{_arg2})
+                set {_1} to 1.1^arg 1*5000
+                set {_2} to 1.1^arg 2*5000
                 set {_3} to {_2}-{_1}
                 message "if you want to rankup from %arg 1% to %arg 2% you would need %{_3}% money" to player
 
 command /rankup <number>:
     trigger:
         if arg 1 is set:
-            set {_1} to 50^(1.2*{rank::%player%})
+            set {_1} to 1.1^{rank::%player%}*5000
             set {_2} to {rank::%player%}+arg 1
-            set {_3} to 50^(1.2*{_2})
+            set {_3} to 1.1^{_2}*5000
             set {_4} to {_1}-{_3}
             set {_5} to {_4}-{balance::%player%}
             if {balance::%player%} < {_4}:
@@ -89,15 +90,15 @@ command /mine:
         else:
 
 			
-function mine(loc1: location,number: int):
+function mine(loc1: location,number: int, p: player):
 	loop {_number} times:
 		set {_start} to {_loc1}
 		loop {_number} times:
-			set block at {_loc1} to random element of {blocks::*}
+			set block at {_loc1} to random element of {blocks::{_p}}
 			set {_loc1} to {_loc1} ~ vector(1,0,0)
 		set {_loc1} to {_start} ~ vector(0,0,1)
 		
 command /create mine:
 	trigger:
-		add stone to {blocks::*}
-		mine(player's location, {minesize::%player%})
+		add stone to {blocks::%player%}
+		mine(player's location, {minesize::%player%}, %player%)
